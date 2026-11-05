@@ -27,7 +27,7 @@ nav ol {
 }
 nav li {
   text-transform: uppercase;
-  font-size: 1.5 rem;
+  font-size: 1.5rem;
   font-weight: 400;
 }
 .active {
@@ -36,7 +36,10 @@ nav li {
 .checkout-inputs {
   width: 60%;
 }
-.checkout-inputs form {
+#checkout-form {
+  display: contents;
+}
+.checkout-inputs .billing-fields {
   display: flex;
   flex-direction: column;
 }
@@ -66,7 +69,7 @@ main {
     flex-direction: column;
 }
 .country-city{
-    flex-direction: space-between;
+    justify-content: space-between;
 }
 .order-summary{
   border:none;
@@ -78,4 +81,47 @@ main {
 .place-order{
   border-radius: .5rem;
   height: 1.5rem;
+  width: 8rem;
+}
+.place-order-dev{
+  justify-content: space-evenly;
+  width:100%;
+}
+.place-order-dev h3{
+  margin: 0;
+}
+.card-info .col-display{
+  gap: .5rem;
+}
+.card-info{
+  display:none;
+}
+#pop-over{
+  border-radius: 0;
+}
+ul{
+  list-style:none;
+  margin: 0;
+  padding: 0;
+}
+
+* { box-sizing: border-box; }
+.checkout-inputs, .summary-and-total, .col-display { min-width: 0; }
+.country-city { gap: 1rem; }
+.country-city > div { flex: 1; }
+input, select, textarea { max-width: 100%; }
+.promo-code .row-display { gap: .5rem; }
+.promo-code input { min-width: 0; flex: 1; }
+#promo-feedback { margin: .5rem 0 0; }
+#pop-over { max-width: min(90vw, 42rem); max-height: 85vh; overflow: auto; overflow-wrap: anywhere; }
+#pop-over li { margin-bottom: .4rem; }
+.place-order-dev { gap: 1rem; flex-wrap: wrap; }
+@media (max-width: 760px) {
+  main { flex-direction: column; padding: 1rem; gap: 1rem; }
+  .checkout-inputs, .summary-and-total { width: 100%; }
+  nav { flex-wrap: wrap; padding: .5rem; gap: .5rem; align-items: center; }
+  nav ol { flex-wrap: wrap; padding: 0; gap: .75rem; }
+  nav li { font-size: 1rem; }
+  .country-city { flex-direction: column; gap: 0; }
+  .order-summary { padding: 0; }
 }

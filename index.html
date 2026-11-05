@@ -9,7 +9,7 @@
   <body>
     <header>
       <nav>
-        <img src="logo.svg" />
+        <img src="logo.svg" alt="Store logo" />
         <ol>
           <li>Home</li>
           <li>Shop</li>
@@ -19,19 +19,32 @@
       </nav>
     </header>
     <main>
+      <form id="checkout-form">
       <section class="checkout-inputs">
         <h2>Billing & Shipping</h2>
-        <form>
+        <div class="billing-fields">
           <label for="full-name">Full Name:</label>
           <input type="text" id="full-name" placeholder="John Smith" required />
           <label for="email">E-mail:</label>
-          <input type="email" id="email" placeholder="example@mail.com" required />
+          <input
+            type="email"
+            id="email"
+            placeholder="example@mail.com"
+            required
+          />
           <label for="phone-number">Phone Number:</label>
-          <input type="number" id="phone-number" placeholder="+96170000000" required />
+          <input
+            type="tel"
+            pattern="[+]?[0-9 ()-]{7,20}"
+            title="Enter a phone number containing 7 to 20 digits, spaces, parentheses or hyphens."
+            id="phone-number"
+            placeholder="+96170000000"
+            required
+          />
           <div class="row-display country-city">
             <div class="col-display">
               <label for="country">Country / Region:</label>
-              <select name="country" id="country">
+              <select name="country" id="country" required>
                 <option value="">--Please choose an option--</option>
                 <option value="lebanon">Lebanon</option>
               </select>
@@ -42,10 +55,19 @@
             </div>
           </div>
           <label for="address">Address:</label>
-          <input type="text" id="address" placeholder="Street 123, Bldg. 105" required />
+          <input
+            type="text"
+            id="address"
+            placeholder="Street 123, Bldg. 105"
+            required
+          />
           <label for="additional-info">Additional Information:</label>
-          <textarea id="additional-info" placeholder="I want the order to be packed in cartoon box..." rows="5"></textarea>
-        </form>
+          <textarea
+            id="additional-info"
+            placeholder="I want the order to be packed in cartoon box..."
+            rows="5"
+          ></textarea>
+        </div>
       </section>
       <section class="summary-and-total">
         <section class="order-summary">
@@ -57,32 +79,85 @@
               <th>Subtotal</th>
             </tr>
           </table>
+          <p>Total items: <span id="item-count"></span></p>
           <table>
             <tr>
               <th>Subtotal</th>
-              <td>100$</td>
+              <td id="sub-total"></td>
             </tr>
+            <tr><th>Discount</th><td id="discount"></td></tr>
+            <tr><th>Delivery fee</th><td id="delivery-fee"></td></tr>
           </table>
           <div class="shipping-method">
             <h3>Shipping Method:</h3>
-            <form>
-              <input id="delivery" type="radio" name="shipping-method" value="delivery" checked/>
-              <label for="delivery">Delivery</label>
-              <input type="radio" id="pickup" name="shipping-method" value="pickup"/>
-              <label for="pickup">Pickup</label>
-            </form>
+            <div id="shipping_radio">
+              <input
+                id="delivery"
+                type="radio"
+                name="shipping_method"
+                value="delivery"
+                checked
+              />
+              <label for="delivery">Standard Delivery ($5)</label>
+              <input
+                type="radio"
+                id="express"
+                name="shipping_method"
+                value="express"
+              />
+              <label for="express">Express Delivery ($10)</label>
+            </div>
           </div>
           <div class="payment-method">
             <h3>Payment Method:</h3>
-            <form>
-              <input type="radio" id="card" name="payment-method" value="card" checked/>
-              <label for="card">Credit Card</label>
-              <input type="radio" id="cash" name="payment-method" value="cash"/>
+            <div id="payment_radio">
+              <input
+                type="radio"
+                id="cash"
+                name="payment-method"
+                value="cash"
+                checked
+              />
               <label for="cash">Cash on Delivery</label>
-            </form>
+              <input
+                type="radio"
+                id="card"
+                name="payment-method"
+                value="card"
+              />
+              <label for="card">Credit/Debit Card</label>
+            </div>
           </div>
-          <button class="place-order">Place Order</button>
+          <div class="card-info" id="card-info">
+            <p>Simulation only: use dummy card information.</p>
+            <div class="col-display">
+              <label for="card-name">Cardholder name:</label>
+              <input id="card-name" type="text" required />
+              <label for="card-number">Card number (16 digits):</label>
+              <input id="card-number" type="text" inputmode="numeric" pattern="[0-9]{16}" maxlength="16" title="Enter exactly 16 digits." required />
+              <label for="card-ccv">CCV (3 digits):</label>
+              <input id="card-ccv" type="text" inputmode="numeric" pattern="[0-9]{3}" maxlength="3" title="Enter exactly 3 digits." required />
+              <label for="card-expiry">Expiry month:</label>
+              <input id="card-expiry" type="month" required />
+            </div>
+          </div>
+          <div class="promo-code">
+            <label for="promo-code">Promo code:</label>
+            <div class="row-display">
+              <input id="promo-code" type="text" placeholder="Enter promo code" aria-describedby="promo-feedback" />
+              <button type="button" id="apply-promo">Apply</button>
+            </div>
+            <p id="promo-feedback" role="status"></p>
+          </div>
+          <div class="place-order-dev row-display">
+            <h3>Total: <span id="total"></span></h3>
+            <button type="submit" class="place-order">Place Order</button>
+          </div>
         </section>
+      </section>
+      </form>
+      <section id="pop-over" popover aria-labelledby="confirmation-title">
+       
       </section>
     </main>
   </body>
